@@ -1,5 +1,5 @@
-import { Product } from "../types/Product";
-import ProductModel from "../database/models/product.model";
+import { Product } from '../types/Product';
+import ProductModel from '../database/models/product.model';
 
 async function addNewProduct(product: Product): Promise<Product> {
   const newProduct = await ProductModel.create(product);
@@ -7,6 +7,5 @@ async function addNewProduct(product: Product): Promise<Product> {
 }
 
 export default {
-  addNewProduct
+  addNewProduct,
 };
-

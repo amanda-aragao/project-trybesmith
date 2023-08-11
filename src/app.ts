@@ -10,5 +10,4 @@ app.get('/', (_req, res) => {
   res.status(200).send('testando aplicação');
 });
 
-
 export default app;
