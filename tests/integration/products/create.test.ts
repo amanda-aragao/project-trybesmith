@@ -12,17 +12,12 @@ describe('POST /products', function () {
   it('ao enviar um produto sem seu nome, devolve um erro', async () => {
     // arrange
     
-    const wrongProduct = {
-      "id": 4,
-      "name": "",
-      "price": "30 peças de ouro",
-      "orderId": 4
-    }
-    const ProductInstance = ProductModel.build(wrongProduct);
+
+    const ProductInstance = ProductModel.build(productsMock.wrongProduct);
     
     sinon.stub(ProductModel, 'create').resolves(ProductInstance);
     //act 
-    const httpResponse = await chai.request(app).post('/products').send(wrongProduct);
+    const httpResponse = await chai.request(app).post('/products').send(productsMock.wrongProduct);
     
     // asseert 
     expect(httpResponse.status).not.to.equal(404);
@@ -31,17 +26,11 @@ describe('POST /products', function () {
 
   it('ao enviar um produto com todos os campos completos', async () => {
     //arrange
-    const rightProduct = {
-      "id": 4,
-      "name": "Martelo de Thor",
-      "price": "30 peças de ouro",
-      "orderId": 4
-    }
-    const ProductInstance = ProductModel.build(rightProduct);
+    const ProductInstance = ProductModel.build(productsMock.rightProduct);
     
     sinon.stub(ProductModel, 'create').resolves(ProductInstance);
     //act 
-    const httpResponse = await chai.request(app).post('/products').send(rightProduct);
+    const httpResponse = await chai.request(app).post('/products').send(productsMock.rightProduct);
     
     // asseert 
     expect(httpResponse.status).to.equal(201);
