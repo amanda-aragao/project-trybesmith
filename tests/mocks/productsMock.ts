@@ -1,11 +1,13 @@
 const rightProduct = {
-  "id": "4",
+  "id": 4,
   "name": "Martelo de Thor",
   "price": "30 peças de ouro",
   "orderId": 4
 }
 
 const wrongProduct = {
+  "id": 4,
+  "name": "",
   "price": "30 peças de ouro",
   "orderId": 4
 }
