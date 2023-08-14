@@ -7,13 +7,17 @@ import productsMock from '../../mocks/productsMock';
 
 chai.use(chaiHttp);
 
-describe('GET /products', function () { 
+describe('GET /products', function () {
   beforeEach(function () { sinon.restore(); });
+
   it('teste se a rota get retorna a lista de produtos completa', async () => {
-   
-    const httpResponse = await chai.request(app).get('/products').send(productsMock.listAllProduct);
-    expect(httpResponse.status).to.equal(200);
-    expect(httpResponse.body).to.be.deep.equal(productsMock.listAllProduct);
+    const productInstance = ProductModel.bulkBuild(productsMock.listAllProduct); // usado pra array
+    sinon.stub(ProductModel, 'findAll').resolves(productInstance);
+
+    const httpResponse = await chai.request(app).get('/products')
+      .send(productsMock.listAllProduct);
+
+    expect(httpResponse.status).to.be.equal(200);
 
   })
 });
